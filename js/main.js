@@ -5,13 +5,22 @@ const margin = {top: 100, right: 0, bottom: 0, left: 0},
     innerRadius = 90,
     outerRadius = Math.min(width, height) / 2;   // the outerRadius goes from the middle of the SVG area to the border
 
+// append the svg object
+var svg = d3.select("#chart-area")
+    .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", `translate(${width/2+margin.left}, ${height/2+margin.top})`);
 
+//color scale:
 var myColor = d3.scaleSequential()
-    .interpolator(d3.interpolatePuRd);
-
-updateVisualization()
+    .interpolator(d3.interpolateViridis);
 
 var max = 60
+
+//init:
+updateVisualization()
 
 function updateVisualization(){
 
@@ -32,35 +41,28 @@ function updateVisualization(){
 
 
         // Scales
-        const x = d3.scaleBand()
-            .range([0, 2 * Math.PI])    // X axis goes from 0 to 2pi = all around the circle. If I stop at 1Pi, it will be around a half circle
-            .align(0)                  // This does nothing
-            .domain(data.map(d => d.Word)); // The domain of the X axis is the list of states.
-        const y = d3.scaleRadial()
+        var x = d3.scaleBand()
+            .range([0, 2 * Math.PI])
+            .align(0)
+            .domain(data.map(d => d.Word)); // The domain of the X axis is the list of words
+        var y = d3.scaleRadial()
             .range([innerRadius, outerRadius])   // Domain will be define later.
             .domain([0, 50]); // Domain of Y is from 0 to the max seen in the data
 
-        //reset svg
-        // document.getElementById("chart-area").remove();
 
+        var barSelection = svg.selectAll("path").data(data)
 
-        // append the svg object
-        var svg = d3.select("#chart-area")
-            .append("svg")
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
-            .append("g")
-            .attr("transform", `translate(${width/2+margin.left}, ${height/2+margin.top})`);
 
         // Add the bars
-        svg.append("g")
-            .selectAll("path")
-            .data(data)
-            .join("path")
+        barSelection.enter().append("path")
+            .attr("class", "bar")
+            .merge(barSelection)
+            .transition()
+            .duration(3000)
             .attr("fill", function (d){
                 return myColor(d.Num)
             })
-            .attr("d", d3.arc()     // imagine your doing a part of a donut plot
+            .attr("d", d3.arc()
                 .innerRadius(innerRadius)
                 .outerRadius(d => y(d['Num']))
                 .startAngle(d => x(d.Word))
@@ -68,11 +70,22 @@ function updateVisualization(){
                 .padAngle(0.01)
                 .padRadius(innerRadius))
 
+        //exit:
+        barSelection.exit()
+            .remove();
+
+        //delete previous text:
+        var element = Array.prototype.slice.call(document.getElementsByTagName("text"),0);
+
+        for (var index = 0, len = element.length; index < len; index++) {
+            element[index].parentNode.removeChild(element[index]);
+        }
+
         // Add the labels
-        svg.append("g")
-            .selectAll("g")
-            .data(data)
-            .join("g")
+        var gSelection = svg.selectAll("g").data(data)
+
+        var g = gSelection.enter().append("g")
+            .merge(gSelection)
             .attr("text-anchor", function (d) {
                 return (x(d.Word) + x.bandwidth() / 2 + Math.PI) % (2 * Math.PI) < Math.PI ? "end" : "start";
             })
@@ -83,11 +96,20 @@ function updateVisualization(){
             .text(function (d) {
                 return (d.Word)
             })
+
             .attr("transform", function (d) {
                 return (x(d.Word) + x.bandwidth() / 2 + Math.PI) % (2 * Math.PI) < Math.PI ? "rotate(180)" : "rotate(0)";
             })
+            .transition()
+            .duration(3000)
             .style("font-size", "11px")
             .attr("alignment-baseline", "middle")
+
+        //exit:
+        gSelection.exit()
+            .remove();
+
+
 
 })
 }

@@ -1,5 +1,6 @@
 Word,Num
 wont,45
+she,34
 dog,22
 stick,20
 fire,18
@@ -8,11 +9,13 @@ water,16
 ox,14
 little,13
 said,12
+i,12
 pig,12
 stile,12
 went,12
 butcher,12
 home,11
+over,11
 piggy,10
 bite,10
 rope,10
@@ -40,9 +43,11 @@ hay,3
 sixpence,2
 yonder,2
 fetch,2
+me,2
 saucer,2
 haystack,2
 soon,2
+in,2
 sweeping,1
 house,1
 found,1
@@ -59,6 +64,7 @@ brought,1
 eaten,1
 gave,1
 lapped,1
+up,1
 fright,1
 jumped,1
 got,1
