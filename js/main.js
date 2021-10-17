@@ -2,7 +2,7 @@
 const margin = {top: 100, right: 0, bottom: 0, left: 0},
     width = 460 - margin.left - margin.right,
     height = 460 - margin.top - margin.bottom,
-    innerRadius = 90,
+    innerRadius = 70,
     outerRadius = Math.min(width, height) / 2;   // the outerRadius goes from the middle of the SVG area to the border
 
 // append the svg object
