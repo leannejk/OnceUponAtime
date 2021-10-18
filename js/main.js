@@ -1,8 +1,8 @@
 // set the dimensions and margins of the graph
 const margin = {top: 100, right: 0, bottom: 0, left: 0},
-    width = 460 - margin.left - margin.right,
-    height = 460 - margin.top - margin.bottom,
-    innerRadius = 70,
+    width = 550 - margin.left - margin.right,
+    height = 550 - margin.top - margin.bottom,
+    innerRadius = 60,
     outerRadius = Math.min(width, height) / 2;   // the outerRadius goes from the middle of the SVG area to the border
 
 // append the svg object
@@ -17,7 +17,7 @@ var svg = d3.select("#chart-area")
 var myColor = d3.scaleSequential()
     .interpolator(d3.interpolateViridis);
 
-var max = 60
+var max = 50
 
 //init:
 updateVisualization()
@@ -47,16 +47,28 @@ function updateVisualization(){
             .domain(data.map(d => d.Word)); // The domain of the X axis is the list of words
         var y = d3.scaleRadial()
             .range([innerRadius, outerRadius])   // Domain will be define later.
-            .domain([0, 50]); // Domain of Y is from 0 to the max seen in the data
+            .domain([0, maxNum]); // Domain of Y is from 0 to the max seen in the data
 
 
-        var barSelection = svg.selectAll("path").data(data)
+        //Tooltip
+        var tip = d3.tip()
+            .attr('class', 'd3-tip')
+            .offset([-10, 0])
+            .html(function(d, i) {
+                return i.Word + ":  <strong style='color:#863c6c'>" + i.Num + "</strong> <span>" + "Times" + "</span>";
+            })
+
+        svg.call(tip);
 
 
         // Add the bars
+        var barSelection = svg.selectAll("path").data(data)
+
         barSelection.enter().append("path")
             .attr("class", "bar")
             .merge(barSelection)
+            .on('mouseover', tip.show)
+            .on('mouseout', tip.hide)
             .transition()
             .duration(3000)
             .attr("fill", function (d){

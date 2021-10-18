@@ -1,5 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Sacramento&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap');
+
 body {
-    font-family: 'Lato', sans-serif;
+    font-family: 'Quicksand', sans-serif;
     background-color: #c0b3bf;
     text-align: center;
 
@@ -16,6 +19,12 @@ h2 {
     font-size: 20px;
     margin-bottom: 30px;
     color: #906688;
+}
+
+.title{
+    font-family: 'Sacramento', cursive;
+    font-size: 100px;
+    color: #701951;
 }
 
 /*************/
@@ -54,3 +63,25 @@ h2 {
 .form-inline button .glyphicon {
     margin-right: 5px;
 }
+
+/****************/
+/*    ToolTip   */
+/****************/
+
+.d3-tip {
+    line-height: 1;
+    font-weight: bold;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    border-radius: 2px;
+}
+
+/* Style northward tooltips differently */
+.d3-tip.n:after {
+    margin: -1px 0 0 0;
+    top: 100%;
+    left: 0;
+}
+
+
