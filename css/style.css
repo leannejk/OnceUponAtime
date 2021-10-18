@@ -84,4 +84,10 @@ h2 {
     left: 0;
 }
 
+img {
+    width: 20%;
+    height: auto;
+    border: 3px solid #863c6c;
+}
+
 

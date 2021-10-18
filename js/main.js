@@ -105,16 +105,16 @@ function updateVisualization(){
                 return "rotate(" + ((x(d.Word) + x.bandwidth() / 2) * 180 / Math.PI - 90) + ")" + "translate(" + (y(d.Num) + 10) + ",0)";
             })
             .append("text")
-            .text(function (d) {
-                return (d.Word)
-            })
 
             .attr("transform", function (d) {
                 return (x(d.Word) + x.bandwidth() / 2 + Math.PI) % (2 * Math.PI) < Math.PI ? "rotate(180)" : "rotate(0)";
             })
             .transition()
             .duration(3000)
-            .style("font-size", "11px")
+            .text(function (d) {
+                return (d.Word)
+            })
+            .style("font-size", "14px")
             .attr("alignment-baseline", "middle")
 
         //exit:
