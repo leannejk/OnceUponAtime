@@ -6,19 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>CSE457 - Assigment 3</title>
 
-
     <link rel="stylesheet" href="css/style.css">
-
-    <link href='https://fonts.googleapis.com/css?family=Lato:400,300,400italic,700' rel='stylesheet' type='text/css'>
 </head>
 <body>
 
 <div class="container">
-
     <h1>Once Upon a Time</h1>
     <h2>Female's point of view</h2>
 
-    <!-- Select box to choose the ranking type -->
+    <!-- Select box to choose the story -->
     <form class="form-inline">
         <div class="form-group">
             <label for="story-chosen">Group by</label>
@@ -28,27 +24,23 @@
                 <option value="TeenyTiny">Teeny-Tiny</option>
                 <option value="TheOldWoman">The Old Woman And Her Pig</option>
                 <option value="TomTitTot">Tom Tit Tot</option>
-                <option value="Earl">Earl Mar's Daugther</option>
+                <option value="Earl">Earl Mar's Daughter</option>
                 <option value="Kate">Kate Crackernuts</option>
                 <option value="TheStrangeVisitor">The Strange Visitor</option>
             </select>
-
-            <!-- Activity IV -->
-            <!--<button type="button" class="btn btn-link" id="change-sorting"><i class="glyphicon glyphicon-sort"></i> Sort</button>-->
         </div>
     </form>
 
     <!-- Parent container for the visualization -->
     <div id="chart-area"></div>
-
 </div>
 
 
-<!-- Load JS libraries: D3 -->
+<!-- Load JS libraries: D3, D3tip -->
 <script src="https://d3js.org/d3.v6.min.js"></script>
 <script src="https://unpkg.com/d3-v6-tip@1.0.6/build/d3-v6-tip.js"></script>
 
-<!-- Your implementation -->
+<!-- implementation -->
 <script src="js/main.js"></script>
 
 </body>

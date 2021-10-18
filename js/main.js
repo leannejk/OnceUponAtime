@@ -17,7 +17,7 @@ var svg = d3.select("#chart-area")
 var myColor = d3.scaleSequential()
     .interpolator(d3.interpolateViridis);
 
-var max = 50
+const max = 50
 
 //init:
 updateVisualization()
@@ -96,7 +96,7 @@ function updateVisualization(){
         // Add the labels
         var gSelection = svg.selectAll("g").data(data)
 
-        var g = gSelection.enter().append("g")
+        gSelection.enter().append("g")
             .merge(gSelection)
             .attr("text-anchor", function (d) {
                 return (x(d.Word) + x.bandwidth() / 2 + Math.PI) % (2 * Math.PI) < Math.PI ? "end" : "start";
